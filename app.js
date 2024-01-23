@@ -15,7 +15,9 @@ const throwDice = (dice) => {
         'd20': 20,
     };
 
+    if (!diceVariants[dice]) return "Вы ошиблись с кубиком";
+
     return `Кинул кубик ${dice} и выкинул ${makeItRandom(1, diceVariants[dice])}`;
 }
 
-console.log(throwDice('d12'));
+console.log(throwDice('d4'));
