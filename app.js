@@ -53,3 +53,5 @@ toyota.info();
 
 toyota.changeMiliage(12000);
 toyota.info();
+
+console.log(toyota);
