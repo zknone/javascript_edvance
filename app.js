@@ -21,7 +21,6 @@ fetchData(address, 'Something went wrong').then((data) => {
     const { abilities } = data;
     const abilityUrl = abilities[0].ability.url;
 
-
     fetchData(abilityUrl, 'Can not fetch ability').then((data) => {
         const {flavor_text_entries: textEntries} = data;
 
