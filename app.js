@@ -54,42 +54,64 @@ toyota.changeMiliage(12000);
 toyota.info();
 
 console.log(toyota);
-=======
-const Person = function(race, name, lang) {
-        this.race = race;
-        this.name = name;
-        this.lang = lang;
-    };
 
-Person.prototype.speak = function() {
-    console.log('I am human and I can speak!');
-}
+class Person {
+    #race;
+    #name;
+    #lang;
 
-const Orc = function(name, lang) {
-    Person.call(this, name, lang);
-    this.name = name;
-    this.lang = lang;
-    this.race = 'Orc';
-    this.hasWeapon = true;
-}
+    constructor(race, name, lang){
+        this.#name = name;
+        this.#race = race;
+        this.#lang = lang;
+    }
 
-Orc.prototype.hit = function(hasWeapon) {
-    hasWeapon?  console.log('Arrggh! Hit human') : console.log('Sorry! I lost my weapon');
-}
+    setRace(race) {
+        this.#race = race;
+    }
 
-const Elf = function(name, lang) {
-    Person.call(this, name, lang);
-    this.name = name;
-    this.lang = lang;
-    this.race = 'Elf';
-    this.spellTypes = ['fireball', 'ice shard'];
-}
+    get() {
+        return this.#name;
+    }
 
-Elf.prototype.castSpell = function(spell) {
-    this.spellTypes.find((item) => {if (item === spell) {
-        console.log(`I cast ${item}!`)
-    }})
+    speak () {
+        console.log('I am human and I can speak!');
+    }
 };
+
+class Orc extends Person {
+    constructor (name, lang) {
+        super(name, lang);
+        this.setRace('Orc');
+        this.hasWeapon = true;
+    }
+
+    hit (hasWeapon) {
+        hasWeapon?  console.log('Arrggh! Hit human') : console.log('Sorry! I lost my weapon');
+    }
+
+    speak () {
+        console.log('I am orc and I crush!');
+    }
+}
+
+class Elf extends Person {
+    constructor(name, lang) {
+        super(name, lang);
+        this.setRace('Elf');
+        this.spellTypes = ['fireball', 'ice shard'];
+    }
+
+    castSpell(spell) {
+        this.spellTypes.find((item) => {if (item === spell) {
+            console.log(`I cast ${item}!`)
+        }})
+    }
+
+    speak() {
+        console.log('I am elf and I collect cats!');
+    }
+}
 
 const Legolas = new Elf('Legolas', 'elvish');
 console.log(Legolas);
@@ -101,7 +123,10 @@ Urgoth.hit(!Urgoth.hasWeapon);
 
 const Boromir = new Person('human', 'Boromir', 'human');
 Boromir.speak();
-=======
+Urgoth.speak();
+Legolas.speak();
+
+
 const monthTime = 30 * 24 * 60 * 60 * 1000;
 const dayTime = 24 * 60 * 60 * 1000;
 const hourTime = 60 * 60 * 1000;
