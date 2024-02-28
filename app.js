@@ -70,17 +70,12 @@ class ItemBilling extends Billing{
 
 
 const firstBill = new Billing(100);
-firstBill.add(10).add(12);
-firstBill.calculateTotal();
 
 const secondBill = new fixBilling(200).add(12).add(13);
-console.log(secondBill.calculateTotal());
 
 const thirdBill = new HourBilling(5, 5).add(12, 1).add(1, 3);
-console.log(thirdBill.calculateTotal());
 
 const fourthBill = new ItemBilling(13, 5).add(2, 1).add(1, 3);
-console.log(fourthBill.calculateTotal());
 
 
 class Car {
@@ -131,12 +126,7 @@ class Car {
 }
 
 const toyota = new Car('Toyota', 'vista', 10000);
-toyota.info();
 
-toyota.changeMiliage(12000);
-toyota.info();
-
-console.log(toyota);
 
 class Person {
     #race;
@@ -176,7 +166,7 @@ class Orc extends Person {
     speak () {
         console.log('I am orc and I crush!');
     }
-    
+} 
 
 class Elf extends Person {
     constructor(name, lang) {
@@ -197,17 +187,10 @@ class Elf extends Person {
 }
 
 const Legolas = new Elf('Legolas', 'elvish');
-console.log(Legolas);
-Legolas.castSpell('fireball');
 
 const Urgoth = new Orc('Urgoth', 'orcish');
-console.log(Urgoth);
-Urgoth.hit(!Urgoth.hasWeapon);
 
 const Boromir = new Person('human', 'Boromir', 'human');
-Boromir.speak();
-Urgoth.speak();
-Legolas.speak();
 
 
 const monthTime = 30 * 24 * 60 * 60 * 1000;
@@ -248,8 +231,6 @@ const setNewYearTimer = () => {
         console.log('Новый год!')
     }, new Date('2024/12/31').getTime()) - new Date + 100;
 }
-
-setNewYearTimer();
       
 const userBirthDay = '2007/1/1';
 
@@ -270,7 +251,6 @@ const checkBirthday = (date) => {
     }
     return 'Ооо. Вы большой мальчик';
 }
-console.log(checkBirthday(userBirthDay));
 
 const makeItRandom = (min, max) => {
     return Math.floor(min + Math.random().toFixed(2)*(max - min + 1))
@@ -291,8 +271,6 @@ const throwDice = (dice) => {
 
     return `Кинул кубик ${dice} и выкинул ${makeItRandom(1, diceVariants[dice])}`;
 }
-
-console.log(throwDice('d4'));
 
 const data = [
     {
@@ -331,4 +309,18 @@ const makeUnique = (array) => {
     return modifiedArray;
 }
 
-console.log(makeUnique(data));
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 500, 'one');
+  });
+  
+  const promise2 = new Promise((resolve, reject) => {
+    setTimeout(reject, 100, 'two');
+  });
+
+const race = (array) => Promise.race(array).then((value) => console.log(value)).catch((error) => console.log('Rejected :', error));
+
+async function app() {
+    race([promise1, promise2]);
+}
+
+app();
