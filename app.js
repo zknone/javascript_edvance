@@ -176,7 +176,7 @@ class Orc extends Person {
     speak () {
         console.log('I am orc and I crush!');
     }
-    
+}   
 
 class Elf extends Person {
     constructor(name, lang) {
