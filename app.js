@@ -1,6 +1,6 @@
 'use strict';
 
-getPosition().then((data) => console.log(data)).catch((error) => console.log(error));
+
 class Billing {
     #amount;
     constructor(amount){
@@ -177,7 +177,7 @@ class Orc extends Person {
     speak () {
         console.log('I am orc and I crush!');
     }
-    
+} 
 
 class Elf extends Person {
     constructor(name, lang) {
@@ -345,3 +345,5 @@ const getPosition = () => {
         }
     )}
 )}
+
+getPosition().then((data) => console.log(data)).catch((error) => console.log(error));
