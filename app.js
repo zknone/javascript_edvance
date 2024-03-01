@@ -17,6 +17,7 @@ const fetchData = async () => {
     const item = document.createElement('li');
     item.id = id;
     const description = document.createElement('div');
+    description.className = 'card-description';
     const button = document.createElement('button');
     description.innerHTML = title;
     button.className = 'delete-button';
@@ -39,6 +40,29 @@ const fetchData = async () => {
     const appContainer = document.querySelector('#app');
     appContainer.addEventListener('click', deleteHandler);
     const appButton = document.querySelector('#start-button');
+
+    let searchTerm = '';
+
+    const input = document.createElement('input');
+    appContainer.append(input);
+
+    input.addEventListener('input', (event) => {
+        searchTerm = event.target.value;
+        const actualList = document.querySelector('#list').childNodes;
+        
+        [...actualList].map((item) => {
+            item.style.color = 'black';
+        })
+
+        if (searchTerm === '') return;
+
+        [...actualList].map((item) => {
+            const itemDescription = item.querySelector('.card-description');
+            if (itemDescription.textContent.includes(searchTerm)) {
+                item.style.color = 'red';
+            }
+        })
+    });
 
     const list = document.createElement('ul');
     list.id = 'list';
