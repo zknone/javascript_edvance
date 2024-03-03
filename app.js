@@ -11,32 +11,42 @@ const MAX_BUTTONS = 5;
     return button;
  }
 
+ let state;
+
+ const resetButtons = (state) => {
+   const buttons = document.querySelectorAll('.button-to-press');
+
+   console.log(buttons);
+
+   [...buttons].map((item) => {
+      if (item.getAttribute('data-id') === state) {
+         item.innerHTML = 'Нажата!';
+      } else {
+         item.innerHTML = 'Нажми меня';
+      };
+   })
+ };
+
  const changeHandler = (event) => {
+   const target = event.target;
+   if (target.className !== 'button-to-press') return;
+   state = target.getAttribute('data-id');
 
-    console.log(event)
-    // searchTerm = event.target.value;
-    // const actualList = document.querySelector('#list').childNodes;
-    
-    // [...actualList].map((item) => {
-    //     item.style.color = 'black';
-    // })
+   const counter = document.querySelector('#counter');
+   counter.innerHTML = state;
 
-    // if (searchTerm === '') return;
-
-    // [...actualList].map((item) => {
-    //     const itemDescription = item.querySelector('.card-description');
-    //     if (itemDescription.textContent.includes(searchTerm)) {
-    //         item.style.color = 'red';
-    //     }
-    // })
+   resetButtons(state);
  }
+
+
 
  const app = async () => {
     const appContainer = document.querySelector('#app');
     console.log(appContainer);
-    for (let i = 1; i++ ;i <= MAX_BUTTONS) {
+    for (let i = 1; i <= MAX_BUTTONS; i++ ) {
         appContainer.append(renderButton(i));
     }
+    appContainer.addEventListener('click',changeHandler);
  };
 
  document.addEventListener('DOMContentLoaded', app);
