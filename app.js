@@ -12,6 +12,7 @@ const MAX_BUTTONS = 5;
  }
 
  let state;
+ let counterBlock = 0;
 
  const resetButtons = (state) => {
    const buttons = document.querySelectorAll('.button-to-press');
@@ -33,7 +34,8 @@ const MAX_BUTTONS = 5;
    state = target.getAttribute('data-id');
 
    const counter = document.querySelector('#counter');
-   counter.innerHTML = state;
+   counterBlock += 1;
+   counter.innerHTML = counterBlock;
 
    resetButtons(state);
  }
