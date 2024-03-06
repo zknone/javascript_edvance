@@ -1,10 +1,11 @@
 {
   "name": "javascript_edvance",
   "version": "1.0.0",
-  "description": "",
+  "description": "Javascript Advance",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup index.js --file bundle.js --format iife && live-server"
   },
   "author": "",
   "license": "ISC"
