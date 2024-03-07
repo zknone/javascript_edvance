@@ -5,6 +5,7 @@ export class AbstractView {
 
     setTitle(title) {
         document.title = title;
+        console.log(this.app);
     }
 
     render(){

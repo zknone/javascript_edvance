@@ -1,77 +1,56 @@
-const fetchData = async () => {
-    try {
-        const response = await fetch('https://dummyjson.com/products/');
-
-        if (!response.ok) {
-            console.log(response.status);
-        }
-        return response.json();
-    } catch {
-        console.log (new Error('Damn'));
-    }    
- };
-
- const renderCard = (title, id) => {
-    const item = document.createElement('li');
-    item.id = id;
-    const description = document.createElement('div');
-    description.className = 'card-description';
-    const button = document.createElement('button');
-    description.innerHTML = title;
-    button.className = 'delete-button';
-    button.innerHTML = 'X';
-    button.setAttribute('data-id', id);
-    item.append(description);
-    item.append(button);
-    return item;
- };
-
- const deleteHandler = (event) => {
-    if (event.target.className === 'delete-button') {
-        const listItemToDelete = event.target.parentNode;
-        listItemToDelete.remove();
+class AbstractView {
+    constructor(){
+        this.app = document.querySelector('#root');
     }
- };
 
- const app = async () => {
-    const { products } = await fetchData();
-    const appContainer = document.querySelector('#app');
-    appContainer.addEventListener('click', deleteHandler);
-    const appButton = document.querySelector('#start-button');
+    setTitle(title) {
+        document.title = title;
+        console.log(this.app);
+    }
 
-    let searchTerm = '';
+    render(){
+        return;
+    };
 
-    const input = document.createElement('input');
-    appContainer.append(input);
+    destroy(){
+        return;
+    };
+}
 
-    input.addEventListener('input', (event) => {
-        searchTerm = event.target.value;
-        const actualList = document.querySelector('#list').childNodes;
-        
-        [...actualList].map((item) => {
-            item.style.color = 'black';
-        });
+class MainView extends AbstractView{
+    constructor(){
+        super();
+        this.setTitle('Book search');
+    }
 
-        if (searchTerm === '') return;
+    render() {
+        const main = document.createElement('div');
+        main.innerHTML = "Hello!";
+        this.app.innerHTML = '';
+        this.app.append(main);
+    }
+}
 
-        [...actualList].map((item) => {
-            const itemDescription = item.querySelector('.card-description');
-            if (itemDescription.textContent.includes(searchTerm)) {
-                item.style.color = 'red';
-            }
-        });
-    });
+class App {
+    routes = [{
+        path: "",
+        view: MainView,
+    }];
 
-    const list = document.createElement('ul');
-    list.id = 'list';
-    list.className = 'products-list';
+    constructor() {
+        window.addEventListener('hashchange', this.route.bind(this));
+        this.route();
+    }
 
-    appButton.addEventListener('click', () => {
-        list.innerHTML='';
-        products.map(item => list.append(renderCard(item.title, item.id)));
-    });
+    route(){
+        if(this.currentView) {
+            this.currentView.destroy();
+        }
+        const view = this.routes.find((item) => item.path === location.hash).view;
+        this.currentView = new view();
+        this.currentView.render();
+    }
+}
 
-    appContainer.append(list);
- };
 
- app();
+new App();
