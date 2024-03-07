@@ -1,7 +1,3 @@
-'use strict';
-
-import "./app.css"; 
-
 const fetchData = async () => {
     try {
         const response = await fetch('https://dummyjson.com/products/');
@@ -28,14 +24,14 @@ const fetchData = async () => {
     item.append(description);
     item.append(button);
     return item;
- }
+ };
 
  const deleteHandler = (event) => {
     if (event.target.className === 'delete-button') {
         const listItemToDelete = event.target.parentNode;
         listItemToDelete.remove();
     }
- }
+ };
 
  const app = async () => {
     const { products } = await fetchData();
@@ -54,7 +50,7 @@ const fetchData = async () => {
         
         [...actualList].map((item) => {
             item.style.color = 'black';
-        })
+        });
 
         if (searchTerm === '') return;
 
@@ -63,7 +59,7 @@ const fetchData = async () => {
             if (itemDescription.textContent.includes(searchTerm)) {
                 item.style.color = 'red';
             }
-        })
+        });
     });
 
     const list = document.createElement('ul');
@@ -73,7 +69,7 @@ const fetchData = async () => {
     appButton.addEventListener('click', () => {
         list.innerHTML='';
         products.map(item => list.append(renderCard(item.title, item.id)));
-    })
+    });
 
     appContainer.append(list);
  };
