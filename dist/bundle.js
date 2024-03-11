@@ -1104,6 +1104,53 @@ const onChange = (object, onChange, options = {}) => {
 onChange.target = proxy => proxy?.[TARGET] ?? proxy;
 onChange.unsubscribe = proxy => proxy?.[UNSUBSCRIBE] ?? proxy;
 
+class DivComponent {
+    constructor() {
+        this.el = document.createElement('div');
+    }
+
+
+    render(){
+        this.el;
+    }
+}
+
+class Header extends DivComponent {
+    constructor(appState){
+        super();
+        this.appState = appState;
+    }
+
+    render(){
+        this.el.innerHTML = "";
+        this.el.classList.add("header");
+        this.el.innerHTML = `
+            <div>
+                <img src="/static/logo.svg" alt="Logo image."/>
+            </div>
+            <ul class="menu">
+                <li class="menu__item">
+                    <a class="menu__item-link" href="#">
+                        <img src="/static/search.svg" alt="Search icon."/>
+                        Book search
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a class="menu__item-link" href="#">
+                        <img src="/static/favorites.svg" alt="Favorites icon."/>
+                        Favorites
+                    </a>
+                    <p class="menu__counter">
+                    ${this.appState.favorites.length}
+                    </p>
+                </li>
+            </ul>    
+        `;
+
+        return this.el;
+    }
+}
+
 class MainView extends AbstractView{
     state = {
         searchQuery: undefined,
@@ -1120,15 +1167,22 @@ class MainView extends AbstractView{
     }
 
     appStateHook(path) {
-        console.log(path);
+        if (path === 'favorites') {
+            console.log(path);
+        }
     }
 
     render() {
         const main = document.createElement('div');
-        main.innerHTML = `Число книг — ${this.appState.favorites.length}!`;
         this.app.innerHTML = '';
         this.app.append(main);
+        this.renderHeader();
         this.appState.favorites.push('1');
+    }
+
+    renderHeader() {
+        const header = new Header(this.appState).render();
+        this.app.prepend(header);
     }
 }
 
