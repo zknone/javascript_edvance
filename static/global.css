@@ -1,4 +1,17 @@
 .root {
     max-width: 663px;
     margin: 0 auto;
+
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 11px;
+    font-style: normal;
+
+    color: var(--black);    
+}
+
+:root {
+    --black: #121212;
+    --white: #FAFAFA;
+
 }

@@ -1136,7 +1136,7 @@ class Header extends DivComponent {
                     </a>
                 </li>
                 <li class="menu__item">
-                    <a class="menu__item-link" href="#">
+                    <a class="menu__item-link" href="#favorites">
                         <img src="/static/favorites.svg" alt="Favorites icon."/>
                         <p class="menu__item-text">Favorites</p>
                     </a>

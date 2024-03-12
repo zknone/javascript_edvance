@@ -24,7 +24,7 @@
     font-weight: 400;
     gap: 10px;
     text-decoration: none;
-    color: #121212;
+    color: var(--black);
 }
 
 .menu__item-link--active {
@@ -37,6 +37,14 @@
 }
 
 .menu__counter {
-    padding: 0;
+    display: block;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+    border-color: var(--black);
+    font-size: 12px;
+    line-height: 28px;
+    font-weight: 600;
+
+    padding: 0 10px;
     margin: 0 0 0 12px;
 }
