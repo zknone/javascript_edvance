@@ -26,6 +26,7 @@ export class MainView extends AbstractView{
 
     render() {
         const main = document.createElement('div');
+        main.classList.add('main');
         this.app.innerHTML = '';
         this.app.append(main);
         this.renderHeader();

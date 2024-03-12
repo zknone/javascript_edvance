@@ -11,4 +11,32 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    list-style: none;
+}
+
+.menu__item {
+    display: flex;
+    align-items: center;
+}
+
+.menu__item-link {
+    display: flex;
+    font-weight: 400;
+    gap: 10px;
+    text-decoration: none;
+    color: #121212;
+}
+
+.menu__item-link--active {
+    font-weight: 700;
+}
+
+.menu__item-text {
+    display: block;
+    margin: auto 0;
+}
+
+.menu__counter {
+    padding: 0;
+    margin: 0 0 0 12px;
 }
